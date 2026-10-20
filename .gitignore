@@ -10,6 +10,13 @@
 /node_modules
 npm-debug.log
 yarn-error.log
+pnpm-debug.log*
+
+# Local environment files
+.env
+.env.*
+!.env.example
+!.env.sample
 
 # IDEs and editors
 .idea/

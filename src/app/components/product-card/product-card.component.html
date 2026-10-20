@@ -1,0 +1,20 @@
+<a class="card overflow-hidden border border-base-300 bg-base-100 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+   [routerLink]="['/products', product().id]">
+  <figure class="aspect-[4/3] bg-base-200">
+    <img
+      class="h-full w-full object-cover"
+      [src]="product().imgURL"
+      [alt]="product().name"
+      loading="lazy"
+    />
+  </figure>
+  <div class="card-body gap-2 p-5">
+    <h3 class="card-title text-lg">{{ product().name }}</h3>
+    <p class="text-sm text-base-content/70">{{ product().area === 'Grocery' ? 'Frutas y verduras' : 'Tecnología' }}</p>
+    <div class="mt-2 flex items-center justify-between">
+      <span class="text-xl font-bold text-primary">${{ product().price }}</span>
+      <span class="badge badge-outline">Existencia: {{ product().stock }}</span>
+    </div>
+  </div>
+</a>
+

@@ -1,0 +1,69 @@
+<main class="mx-auto min-h-[70vh] max-w-7xl px-4 py-10 md:px-8">
+  <h1 class="mb-2 text-3xl font-bold">Tu carrito</h1>
+  <p class="mb-8 text-base-content/70">
+    {{ cart.itemCount() }} {{ cart.itemCount() === 1 ? 'producto' : 'productos' }}
+  </p>
+
+  @if (cart.items().length) {
+    <div class="grid items-start gap-8 lg:grid-cols-[1fr_20rem]">
+      <section class="space-y-4" aria-label="Productos en el carrito">
+        @for (product of cart.items(); track product.id) {
+          <article class="card card-side flex-col overflow-hidden border border-base-300 bg-base-100 shadow-sm sm:flex-row">
+            <figure class="h-48 w-full bg-base-200 sm:h-36 sm:w-40 sm:shrink-0">
+              <img class="h-full w-full object-cover" [src]="product.imgURL" [alt]="product.name" />
+            </figure>
+            <div class="card-body gap-3 p-5 sm:flex-row sm:items-center">
+              <div class="min-w-0 flex-1">
+                <h2 class="card-title">{{ product.name }}</h2>
+                <p class="text-sm text-base-content/70">
+                  ${{ product.price }}
+                </p>
+              </div>
+              <span class="font-bold">${{ product.price }}</span>
+              <button
+                class="btn btn-ghost btn-sm text-error"
+                type="button"
+                [attr.aria-label]="'Quitar ' + product.name"
+                (click)="cart.remove(product.id)"
+              >
+                Quitar
+              </button>
+            </div>
+          </article>
+        }
+      </section>
+
+      <aside class="card border border-base-300 bg-base-100 shadow-sm">
+        <div class="card-body">
+          <h2 class="card-title">Resumen</h2>
+          <div class="mt-2 flex justify-between">
+            <span>Subtotal</span>
+            <span>${{ cart.subtotal() }}</span>
+          </div>
+          <p class="text-sm text-base-content/60">El envío se calcula al confirmar tu compra.</p>
+          <div class="divider my-1"></div>
+          <div class="flex justify-between text-lg font-bold">
+            <span>Total</span>
+            <span>${{ cart.subtotal() }}</span>
+          </div>
+          <button class="btn btn-primary mt-3" type="button" disabled>
+            Pago próximamente
+          </button>
+          <a class="btn btn-ghost" routerLink="/products">Seguir comprando</a>
+        </div>
+      </aside>
+    </div>
+  } @else {
+    <section class="hero min-h-72 rounded-box bg-base-200">
+      <div class="hero-content text-center">
+        <div class="max-w-md">
+          <h2 class="text-2xl font-bold">Tu carrito está vacío</h2>
+          <p class="py-4 text-base-content/70">Explora el catálogo y agrega tus productos favoritos.</p>
+          <a class="btn btn-primary" routerLink="/products">Explorar productos</a>
+        </div>
+      </div>
+    </section>
+  }
+</main>
+
+<app-store-footer />

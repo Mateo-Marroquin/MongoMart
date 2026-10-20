@@ -1,0 +1,50 @@
+<main class="mx-auto min-h-[70vh] max-w-7xl px-4 py-10 md:px-8">
+  @if (product; as item) {
+    <div class="mb-6 text-sm breadcrumbs">
+      <ul>
+        <li><a routerLink="/">Inicio</a></li>
+        <li><a routerLink="/products">Productos</a></li>
+        <li>{{ item.name }}</li>
+      </ul>
+    </div>
+
+    <section class="grid gap-8 rounded-box border border-base-300 bg-base-100 p-5 shadow-sm md:grid-cols-2 md:p-8">
+      <figure class="aspect-square overflow-hidden rounded-box bg-base-200">
+        <img class="h-full w-full object-cover" [src]="item.imgURL" [alt]="item.name" />
+      </figure>
+      <div class="flex flex-col justify-center">
+        <span class="badge badge-primary badge-outline w-fit">
+          {{ item.area === 'Grocery' ? 'Frutas y verduras' : 'Tecnología' }}
+        </span>
+        <h1 class="mt-4 text-3xl font-bold md:text-4xl">{{ item.name }}</h1>
+        <p class="mt-3 text-base-content/70">
+          Un producto seleccionado por MongoMart, disponible para agregar a tu carrito.
+        </p>
+        <p class="mt-6 text-3xl font-bold text-primary">
+          {{ item.price }}
+        </p>
+        <p class="mt-2 text-sm" [class.text-error]="item.stock === 0">
+          {{ item.stock > 0 ? item.stock + ' disponibles' : 'Agotado' }}
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <button class="btn btn-primary" type="button" [disabled]="item.stock === 0" (click)="addToCart()">
+            Agregar al carrito
+          </button>
+          <a class="btn btn-outline" routerLink="/products">Volver al catálogo</a>
+        </div>
+      </div>
+    </section>
+  } @else {
+    <section class="hero min-h-72 rounded-box bg-base-200">
+      <div class="hero-content text-center">
+        <div class="max-w-md">
+          <h1 class="text-3xl font-bold">Producto no encontrado</h1>
+          <p class="py-4 text-base-content/70">El producto solicitado no está disponible.</p>
+          <a class="btn btn-primary" routerLink="/products">Ir al catálogo</a>
+        </div>
+      </div>
+    </section>
+  }
+</main>
+
+<app-store-footer />

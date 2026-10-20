@@ -1,0 +1,18 @@
+<main class="mx-auto min-h-[70vh] max-w-7xl px-4 py-10 md:px-8">
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold">Catálogo de productos</h1>
+    <p class="mt-1 text-base-content/70">Productos disponibles en MongoMart.</p>
+  </div>
+
+  <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    @for (product of products; track product.id) {
+      <app-product-card [product]="product" />
+    } @empty {
+      <div class="alert alert-info col-span-full">
+        <span>No hay productos disponibles.</span>
+      </div>
+    }
+  </div>
+</main>
+
+<app-store-footer />
