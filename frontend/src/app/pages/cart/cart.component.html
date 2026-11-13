@@ -7,7 +7,7 @@
   @if (cart.items().length) {
     <div class="grid items-start gap-8 lg:grid-cols-[1fr_20rem]">
       <section class="space-y-4" aria-label="Productos en el carrito">
-        @for (product of cart.items(); track product.id) {
+        @for (product of cart.items(); track product._id) {
           <article class="card card-side flex-col overflow-hidden border border-base-300 bg-base-100 shadow-sm sm:flex-row">
             <figure class="h-48 w-full bg-base-200 sm:h-36 sm:w-40 sm:shrink-0">
               <img class="h-full w-full object-cover" [src]="product.imgURL" [alt]="product.name" />
@@ -24,7 +24,7 @@
                 class="btn btn-ghost btn-sm text-error"
                 type="button"
                 [attr.aria-label]="'Quitar ' + product.name"
-                (click)="cart.remove(product.id)"
+                (click)="cart.remove(product._id)"
               >
                 Quitar
               </button>

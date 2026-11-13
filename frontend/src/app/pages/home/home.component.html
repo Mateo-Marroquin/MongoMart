@@ -7,10 +7,13 @@
       <p class="mt-1 text-base-content/70">Descubre lo nuevo en tecnología.</p>
     </div>
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      @for (product of techProducts; track product.id) {
+      @for (product of techProducts(); track product._id) {
         <app-product-card [product]="product" />
       }
     </div>
+    @if (error()) {
+      <p class="mt-4 text-error" role="alert">{{ error() }}</p>
+    }
     <div
       class="hero mt-8 min-h-72 overflow-hidden rounded-box bg-cover bg-center"
       style="background-image: url('https://images.pexels.com/photos/32912404/pexels-photo-32912404.jpeg?auto=compress&cs=tinysrgb&w=1600')"
@@ -27,7 +30,7 @@
       <h2 class="text-3xl font-bold">Frutas y verduras</h2>
     </div>
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-      @for (product of groceryProducts; track product.id) {
+      @for (product of groceryProducts(); track product._id) {
         <app-product-card [product]="product" />
       }
     </div>

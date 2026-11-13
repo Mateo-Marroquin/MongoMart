@@ -1,8 +1,12 @@
+export type ProductArea = 'Electronics' | 'Grocery';
+
 export interface Product {
-  id: number;
+  _id: string;
   name: string;
   price: number;
   stock: number;
-  area: string;
+  area: ProductArea;
   imgURL: string;
 }
+
+export type NewProduct = Omit<Product, '_id'>;

@@ -1,0 +1,102 @@
+<main class="mx-auto min-h-[70vh] max-w-3xl px-4 py-10 md:px-8">
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold">Crear producto</h1>
+    <p class="mt-1 text-base-content/70">Completa los datos para agregarlo al catálogo.</p>
+  </div>
+
+  <form
+    [formGroup]="productForm"
+    class="card gap-5 border border-base-300 bg-base-100 p-6 shadow-sm"
+    (ngSubmit)="createProduct()"
+  >
+    <label class="form-control">
+      <span class="label-text mb-2">Nombre</span>
+      <input
+        class="input input-bordered"
+        formControlName="name"
+        [class.input-error]="fieldError('name')"
+        [attr.aria-invalid]="!!fieldError('name')"
+        aria-describedby="name-error"
+      />
+      @if (fieldError('name'); as message) {
+        <span id="name-error" class="mt-1 text-sm text-error" role="alert">{{ message }}</span>
+      }
+    </label>
+
+    <div class="grid gap-5 sm:grid-cols-2">
+      <label class="form-control">
+        <span class="label-text mb-2">Precio</span>
+        <input
+          class="input input-bordered"
+          type="number"
+          formControlName="price"
+          [class.input-error]="fieldError('price')"
+          [attr.aria-invalid]="!!fieldError('price')"
+          aria-describedby="price-error"
+          step="0.01"
+        />
+        @if (fieldError('price'); as message) {
+          <span id="price-error" class="mt-1 text-sm text-error" role="alert">{{ message }}</span>
+        }
+      </label>
+      <label class="form-control">
+        <span class="label-text mb-2">Existencia</span>
+        <input
+          class="input input-bordered"
+          type="number"
+          formControlName="stock"
+          [class.input-error]="fieldError('stock')"
+          [attr.aria-invalid]="!!fieldError('stock')"
+          aria-describedby="stock-error"
+          step="1"
+        />
+        @if (fieldError('stock'); as message) {
+          <span id="stock-error" class="mt-1 text-sm text-error" role="alert">{{ message }}</span>
+        }
+      </label>
+    </div>
+
+    <label class="form-control">
+      <span class="label-text mb-2">Categoría</span>
+      <select
+        class="select select-bordered"
+        formControlName="area"
+        [class.select-error]="fieldError('area')"
+        [attr.aria-invalid]="!!fieldError('area')"
+        aria-describedby="area-error"
+      >
+        <option value="Electronics">Tecnología</option>
+        <option value="Grocery">Frutas y verduras</option>
+      </select>
+      @if (fieldError('area'); as message) {
+        <span id="area-error" class="mt-1 text-sm text-error" role="alert">{{ message }}</span>
+      }
+    </label>
+
+    <label class="form-control">
+      <span class="label-text mb-2">URL de imagen</span>
+      <input
+        class="input input-bordered"
+        type="url"
+        formControlName="imgURL"
+        [class.input-error]="fieldError('imgURL')"
+        [attr.aria-invalid]="!!fieldError('imgURL')"
+        aria-describedby="imgURL-error"
+      />
+      @if (fieldError('imgURL'); as message) {
+        <span id="imgURL-error" class="mt-1 text-sm text-error" role="alert">{{ message }}</span>
+      }
+    </label>
+
+    @if (error()) {
+      <p class="text-error" role="alert">{{ error() }}</p>
+    }
+
+    <div class="flex flex-wrap gap-3">
+      <button class="btn btn-primary" type="submit" [disabled]="isSubmitting()">
+        {{ isSubmitting() ? 'Guardando...' : 'Guardar producto' }}
+      </button>
+      <a class="btn btn-ghost" routerLink="/products">Cancelar</a>
+    </div>
+  </form>
+</main>

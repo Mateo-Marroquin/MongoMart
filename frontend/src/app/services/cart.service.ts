@@ -17,7 +17,7 @@ export class CartService {
     this.itemsState.update((items) => {
       if (
         product.stock < 1 ||
-        items.some((item) => item.id === product.id)
+        items.some((item) => item._id === product._id)
       ) {
         return items;
       }
@@ -26,9 +26,9 @@ export class CartService {
     });
   }
 
-  remove(productId: number): void {
+  remove(productId: string): void {
     this.itemsState.update((items) =>
-      items.filter((product) => product.id !== productId),
+      items.filter((product) => product._id !== productId),
     );
   }
 }
